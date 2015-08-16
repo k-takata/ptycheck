@@ -32,6 +32,7 @@ int is_cygpty(int fd)
 	WCHAR *p = NULL;
 
 	h = (HANDLE) _get_osfhandle(fd);
+	/* Cygwin/msys's pty is a pipe. */
 	if (GetFileType(h) != FILE_TYPE_PIPE) {
 		return 0;
 	}
@@ -39,6 +40,8 @@ int is_cygpty(int fd)
 	if (nameinfo == NULL) {
 		return 0;
 	}
+	/* Check the name of the pipe:
+	 * '\{cygwin,msys}-XXXXXXXXXXXXXXXX-ptyN-{from,to}-master' */
 	if (GetFileInformationByHandleEx(h, FileNameInfo, nameinfo, size)) {
 		nameinfo->FileName[nameinfo->FileNameLength / sizeof(WCHAR)] = L'\0';
 		p = nameinfo->FileName;
