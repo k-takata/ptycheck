@@ -9,6 +9,8 @@
 #include <ctype.h>
 #include <tchar.h>
 
+#if _WIN32_WINNT < 0x0600
+/* VC 7.1 or earlier doesn't support SAL. */
 #if !defined(_MSC_VER) || (_MSC_VER < 1400)
 #define __out
 #define __in
@@ -18,6 +20,7 @@
  * http://www.microsoft.com/en-us/download/details.aspx?id=22599
  * Needed for WinXP. */
 #include <fileextd.h>
+#endif
 
 #include "iscygpty.h"
 
