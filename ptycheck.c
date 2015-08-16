@@ -19,69 +19,7 @@
  * Needed for WinXP. */
 #include <fileextd.h>
 
-
-
-/* Check if the fd is a cygwin/msys's pty. */
-int is_cygpty(int fd)
-{
-	HANDLE h;
-	int size = sizeof(FILE_NAME_INFO) + sizeof(WCHAR) * MAX_PATH;
-	FILE_NAME_INFO *nameinfo;
-	WCHAR *p = NULL;
-
-	h = (HANDLE) _get_osfhandle(fd);
-	if (GetFileType(h) != FILE_TYPE_PIPE) {
-		return 0;
-	}
-	nameinfo = malloc(size); 
-	if (nameinfo == NULL) {
-		return 0;
-	}
-	if (GetFileInformationByHandleEx(h, FileNameInfo, nameinfo, size)) {
-		nameinfo->FileName[nameinfo->FileNameLength / sizeof(WCHAR)] = L'\0';
-		p = nameinfo->FileName;
-		if (wcsncmp(p, L"\\cygwin-", 8) == 0) {
-			p += 8;
-		} else if (wcsncmp(p, L"\\msys-", 6) == 0) {
-			p += 6;
-		} else {
-			p = NULL;
-		}
-		if (p != NULL) {
-			p += 16;	/* Skip 16-digit hexadecimal. */
-			if (wcsncmp(p, L"-pty", 4) == 0) {
-				p += 4;
-			} else {
-				p = NULL;
-			}
-		}
-		if (p != NULL) {
-			while (*p && isdigit(*p))	/* Skip pty number. */
-				++p;
-			if (wcsncmp(p, L"-from-master", 12) == 0) {
-				p += 12;
-			} else if (wcsncmp(p, L"-to-master", 10) == 0) {
-				p += 10;
-			} else {
-				p = NULL;
-			}
-		}
-	}
-	free(nameinfo);
-	return (p != NULL);
-}
-
-/* Check if at least one cygwin/msys pty is used. */
-int is_cygpty_used(void)
-{
-	int fd, ret = 0;
-
-	for (fd = 0; fd < 3; fd++) {
-		ret |= is_cygpty(fd);
-	}
-	return ret;
-}
-
+#include "iscygpty.h"
 
 
 const char *get_file_type_name(HANDLE h)

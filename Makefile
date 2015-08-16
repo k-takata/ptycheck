@@ -19,10 +19,13 @@ LDFLAGS = /link /libpath:$(FILEIDAPIDIR)/lib/$(fileiddir)
 
 all: ptycheck.exe
 
-ptycheck.exe: ptycheck.obj ntdllstub/$(outdir)/ntdllstub.lib
+ptycheck.exe: ptycheck.obj iscygpty.obj ntdllstub/$(outdir)/ntdllstub.lib
 	$(CC) $(CFLAGS) /Fe$@ $** fileextd.lib kernel32.lib $(LDFLAGS)
 
 ptycheck.obj: ptycheck.c
+	$(CC) $(CFLAGS) /c /Fo$@ $*.c
+
+iscygpty.obj: iscygpty.c
 	$(CC) $(CFLAGS) /c /Fo$@ $*.c
 
 ntdllstub/$(outdir)/ntdllstub.lib:
