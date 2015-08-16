@@ -1,0 +1,8 @@
+.*
+*.dll
+*.exe
+*.exp
+*.obj
+*~
+
+!.gitignore

@@ -1,0 +1,4 @@
+LIBRARY	ntdll
+EXPORTS
+	RtlSetLastWin32Error
+	NtWaitForSingleObject
