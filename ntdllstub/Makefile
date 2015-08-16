@@ -3,21 +3,21 @@ WIN64=1
 !ENDIF
 
 !IFDEF WIN64
-outdir=x64
+arch=x64
 !ELSE
-outdir=x86
+arch=x86
 !ENDIF
 
 CFLAGS = -nologo
 
 
-all: $(outdir)/ntdllstub.lib
+all: $(arch)/ntdllstub.lib
 
-$(outdir)/ntdllstub.lib: $(outdir)/ntdll.obj ntdll.def
-	link /nologo /dll /out:$(outdir)/ntdll.dll /implib:$@ $(outdir)/ntdll.obj /def:ntdll.def
+$(arch)/ntdllstub.lib: $(arch)/ntdll.obj ntdll.def
+	link /nologo /dll /out:$(arch)/ntdll.dll /implib:$@ $(arch)/ntdll.obj /def:ntdll.def
 
-$(outdir)/ntdll.obj: ntdll.c
-	-if not exist $(outdir) mkdir $(outdir)
+$(arch)/ntdll.obj: ntdll.c
+	-if not exist $(arch) mkdir $(arch)
 	$(CC) $(CFLAGS) /c /Fo$@ $**
 
 clean:

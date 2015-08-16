@@ -1,13 +1,7 @@
-#define WINVER 0x501
-/* Do not include FileID API declaration from winbase.h.
- * Needed for WinXP. */
-#define _WIN32_WINNT 0x501
 #include <locale.h>
 #include <io.h>
 #include <stdio.h>
 #include <windows.h>
-#include <ctype.h>
-#include <tchar.h>
 
 #if _WIN32_WINNT < 0x0600
 /* VC 7.1 or earlier doesn't support SAL. */

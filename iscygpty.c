@@ -1,7 +1,3 @@
-#define WINVER 0x501
-/* Do not include FileID API declaration from winbase.h.
- * Needed for WinXP. */
-#define _WIN32_WINNT 0x501
 #include <ctype.h>
 #include <io.h>
 #include <wchar.h>
