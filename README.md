@@ -22,4 +22,4 @@ nmake
 
 ## License
 
-[The MIT License](LICENSE).
+[The MIT License](LICENSE). (You can also choose the Vim license.)
