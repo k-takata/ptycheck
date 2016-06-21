@@ -19,6 +19,15 @@ If you want to execute the sample on Vista or later and if you use VC9 or later,
 nmake
 ```
 
+### Configurations of iscygpty.c
+
+iscygpty.c has some configurations:
+
+* `USE_FILEEXTD`: If this is defined, Win32 FileID API Library is linked. This is mandatory if you want to detect Cygwin pty on WinXP. If you want to use this, `_WIN32_WINNT` should be 0x0501 or lower.
+* `USE_DYNFILEID`: If this is defined, `GetFileInformationByHandleEx` is loaded dynamically (more precisely, explicitly). You can run a program even on WinXP or earlier, but Cygwin pty is not detected on the old OSes when `USE_FILEEXTD` is not defined.
+
+If both `USE_FILEEXTD` and `USE_DYNFILEID` are not defined, the program can run only on Vista or later.
+
 
 ## License
 
