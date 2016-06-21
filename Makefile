@@ -16,7 +16,7 @@ CFLAGS = -nologo -MD
 !IFDEF FILEIDAPIDIR
 # _WIN32_WINNT should be < 0x0600 in order not to include FileID API
 # declaration from winbase.h.  Needed for WinXP.
-CFLAGS = $(CFLAGS) -DWINVER=0x0501 -D_WIN32_WINNT=0x0501 -I$(FILEIDAPIDIR)/inc
+CFLAGS = $(CFLAGS) -DUSE_FILEEXTD -DWINVER=0x0501 -D_WIN32_WINNT=0x0501 -I$(FILEIDAPIDIR)/inc
 LIB = $(FILEIDAPIDIR)/lib/$(fileidarch);$(LIB)
 !ENDIF
 
