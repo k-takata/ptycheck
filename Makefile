@@ -36,11 +36,11 @@ iscygpty.obj: iscygpty.c
 
 ntdllstub/$(arch)/ntdllstub.lib:
 	cd ntdllstub
-	$(MAKE)
+	$(MAKE) /nologo
 	cd ..
 
 clean:
 	del ptycheck.exe ptycheck.obj iscygpty.obj
 	cd ntdllstub
-	$(MAKE) clean
+	$(MAKE) /nologo clean
 	cd ..

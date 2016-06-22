@@ -21,4 +21,5 @@ $(arch)/ntdll.obj: ntdll.c
 	$(CC) $(CFLAGS) /c /Fo$@ $**
 
 clean:
-	-rd /s /q x86 x64
+	-if exist x64\nul rd /s /q x64
+	-if exist x86\nul rd /s /q x86
