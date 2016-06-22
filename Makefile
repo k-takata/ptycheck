@@ -18,11 +18,14 @@ CFLAGS = -nologo -MD
 # declaration from winbase.h.  Needed for WinXP.
 CFLAGS = $(CFLAGS) -DUSE_FILEEXTD -DWINVER=0x0501 -D_WIN32_WINNT=0x0501 -I$(FILEIDAPIDIR)/inc
 LIB = $(FILEIDAPIDIR)/lib/$(fileidarch);$(LIB)
+NTDLLSTUB = ntdllstub/$(arch)/ntdllstub.lib
+!ELSE
+NTDLLSTUB =
 !ENDIF
 
 all: ptycheck.exe
 
-ptycheck.exe: ptycheck.obj iscygpty.obj ntdllstub/$(arch)/ntdllstub.lib
+ptycheck.exe: ptycheck.obj iscygpty.obj $(NTDLLSTUB)
 	$(CC) $(CFLAGS) /Fe$@ $** fileextd.lib kernel32.lib
 
 ptycheck.obj: ptycheck.c
