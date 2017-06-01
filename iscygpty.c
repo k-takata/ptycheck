@@ -2,7 +2,7 @@
  * iscygpty.c -- part of ptycheck
  * https://github.com/k-takata/ptycheck
  *
- * Copyright (c) 2015-2016 K.Takata
+ * Copyright (c) 2015-2017 K.Takata
  *
  * You can redistribute it and/or modify it under the terms of either
  * the MIT license (as described below) or the Vim license.
@@ -26,6 +26,8 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+#ifdef _WIN32
 
 #include <ctype.h>
 #include <io.h>
@@ -177,5 +179,7 @@ int is_cygpty_used(void)
 	}
 	return ret;
 }
+
+#endif /* _WIN32 */
 
 /* vim: set ts=4 sw=4: */
