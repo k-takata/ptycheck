@@ -53,12 +53,12 @@ int main(int argc, char argv[])
 
 	for (i = 0; i < 3; i++) {
 		HANDLE h;
-		int size = sizeof(FILE_NAME_INFO) + sizeof(WCHAR) * MAX_PATH;
+		int size = sizeof(FILE_NAME_INFO) + sizeof(WCHAR) * (MAX_PATH - 1);
 		FILE_NAME_INFO *nameinfo;
 		const char *type;
 
 		h = (HANDLE) _get_osfhandle(i);
-		nameinfo = malloc(size); 
+		nameinfo = malloc(size + sizeof(WCHAR));
 		if (nameinfo == NULL) {
 			printf("Not enough memory\n");
 			exit(1);
