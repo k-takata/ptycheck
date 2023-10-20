@@ -30,6 +30,16 @@ iscygpty.c has some configurations:
 If both `USE_FILEEXTD` and `USE_DYNFILEID` are not defined, the program can run only on Vista or later.
 
 
+## ConPTY
+
+Recent versions of Windows support [ConPTY](https://learn.microsoft.com/en-us/windows/console/creating-a-pseudoconsole-session) and Cygwin/MSYS2 can use it.
+This allows an application to run as it is in a normal console window.
+ptycheck doesn't detect when it is run in ConPTY, which is the expected behavior.
+
+To enable or disable ConPTY, you can set the `CYGWIN` or `MSYS` environment variable to `enable_pcon` or `disable_pcon` before starting mintty.
+mintty also supports the `-P [on|off]` or `--pcon [on|off]` option.
+
+
 ## License
 
 [The MIT License](LICENSE). (You can also choose the Vim license.)
